@@ -11,4 +11,4 @@ Risks:
   - Userbases are fickle, and no one may end up using our app.
     - Mitigation: We'll do what we can to make the app easy to use, and visually attractive.
 VCS: Git with Github
-VCS Link: https://www.github.com/masnes/CSCI-3308-Project.git
+VCS Link: https://www.github.com/masnes/BufGrades.git
