@@ -1,7 +1,7 @@
 Who: Michael Asnes, Nicholas Riffel, Nishesh Shukla, David Becker, Jeremy Chrestionson
 Title: LightningGodz, BufGrades, NotSureYet
 Description: We're building a grade tracker which keeps track of assignment types (tests, homework, projects, etc.) and the grade-weight of each one. User's can specify this information when they start a class, and the app will record it. From there, the user will input the grades they receive on these assignment types, and the grade tracker will tell them their current grade, projected grade, and how well they need to do on future assignments to make various grades for the class.
-Vision statement: TODO
+Vision statement: Majority of the students loose track of their grades and current standing in their classes or what they require to achieve a certain grade in class, this project would allow students to keep track and be aware of changes in their class standings on a daily bases.
 Motivation: Everyone in our group manually does some of these calcutions, and would like to use this app.
 Risks:
   - Our team members mostly don't know each other well, so we have yet to see if our group will be a good fit.
