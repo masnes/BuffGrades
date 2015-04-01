@@ -2,94 +2,66 @@
 from __future__ import print_function
 import mysql.connector
 from mysql.connector import errorcode
-
+from TableData import TABLES, TABLEORDER
 
 DB_NAME = 'BuffGrades'
 
-TABLES = {}
-TABLES['users_students'] = (
-    "CREATE TABLE `users_students` ("
-	"studentId int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,"
-	"userNameId varchar(16) NOT NULL,"
-	"courseId varchar(8) NOT NULL);"
-    "  PRIMARY KEY (`studentID`)"
-    ") ENGINE=InnoDB")
-
-
-TABLES['personal_info'] = (
-    "CREATE TABLE `personal_info` ("
-	"personalInfoId int(11) AUTO_INCREMENT NOT NULL,"
-	"userName varchar(16) NOT NULL,"
-	"firstName varchar(16) NOT NULL,"
-	"lastName varchar(16) NOT NULL,"
-	"  PRIMARY KEY (`personalInfoId`)"
-    ") ENGINE=InnoDB")
+class DatabaseSetup(object):
+    def __init__(self):
+        cnx, cursor = self.connect()
+        self.connect_to_and_or_create_database(cnx, cursor)
+        self.create_tables(cursor)
+        self.finish(cnx, cursor)
     
-TABLES['courses'] = (
-	"CREATE TABLE courses ("
-	"id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,"
-	"assignmentId int(8) NOT NULL,"
-	"courseId varchar(8) NOT NULL,"
-	"courseName varchar(30) NOT NULL,"
-	"assignmentTypeId varchar(12) NOT NULL);"
-    "  PRIMARY KEY ('id')"
-    ")ENGINE=InnoDB")
+    def connect(self):
+        try:
+            print("Attempting Connection")
+            cnx = mysql.connector.connect(user='root',password= 'pass', database="BuffGrades")
+            print("Creating Cursor")
+            cursor = cnx.cursor()
+            
+            return cnx, cursor
+        except mysql.connector.Error as err:
+            print("Connection Failed: {} , Attempting to create database".format(err))
+            cnx = mysql.connector.connect(user='root', password='pass')
+            return cnx, cnx.cursor()
+    
+    def connect_to_and_or_create_database(self, cnx, cursor):
+        try:
+            cnx.database = DB_NAME    
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_BAD_DB_ERROR:
+                self.create_database(cursor)
+                cnx.database = DB_NAME
+            else:
+                print(err)
+                exit(1)
+    
+    def create_database(self, cursor):
+        try:
+            cursor.execute(
+                "CREATE DATABASE {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
+        except mysql.connector.Error as err:
+            print("Database Creation FAILURE: {}".format(err))
+            exit(1)
 
-TABLES['assignmentTypeId']=(
-	"CREATE TABLE assignmentTypeId ("
-	"id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,"
-	"assignmentTypeID varchar(8) NOT NULL,"
-	"assignmentId varchar(30) NOT NULL,"
-	"typeName varchar(12) NOT NULL,"
-	"typeWeight int(3) NOT NULL,"
-	"numOfAssigns int(3) NOT NULL);"
-	"PRIMARY KEY ('id')"
-	") ENGINE=InnoDB")
+    def create_tables(self, cursor):
+        for name in TABLEORDER:
+            ddl = TABLES[name]
+            try:
+                print("Creating table {}: ".format(name), end='')
+                cursor.execute(ddl)
+            except mysql.connector.Error as err:
+                if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
+                    print("already exists.")
+                else:
+                    print(err.msg)
+            else:
+                print("All set")
+    
+    def finish(self, cnx, cursor):
+        cursor.close()
+        cnx.close()
 
-TABLES['assignment'] = (
-    "CREATE TABLE `personal_info` ("
-	"id int(11) AUTO_INCREMENT NOT NULL,"
-	"assignmentID int(8) NOT NULL,"
-	"assigmentTypeID varchar(16) NOT NULL,"
-	"pointsPossible int(4) NOT NULL,"
-	"studentScore int(4) NOT NULL,"
-    "  PRIMARY KEY (`id`)"
-    ") ENGINE=InnoDB")
-try:
-	cnx = mysql.connector.connect(user='root',password= 'pass', database='test')
-	cursor = cnx.cursor()
-	print("Connection attempted")
-except mysql.connector.Error as err:
-	print("Game Over man, Game Over: {}".format(err))
-
-def create_database(cursor):
-    try:
-        cursor.execute(
-            "CREATE DATABASE {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
-    except mysql.connector.Error as err:
-        print("Database Creation FAILURE: {}".format(err))
-        exit(1)
-try:
-    cnx.database = DB_NAME    
-    print("aaaaaaaaaargh")
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_BAD_DB_ERROR:
-        create_database(cursor)
-        cnx.database = DB_NAME
-    else:
-        print(err)
-        exit(1)
-for name, ddl in TABLES.iteritems():
-    try:
-        print("Creating table {}: ".format(name), end='')
-        cursor.execute(ddl)
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-            print("already exists.")
-        else:
-            print(err.msg)
-    else:
-        print("All set")
-
-cursor.close()
-cnx.close()
+if __name__ == '__main__':
+    DatabaseSetup()
