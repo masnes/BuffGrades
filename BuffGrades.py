@@ -11,19 +11,20 @@ class DatabaseSetup(object):
         cnx, cursor = self.connect()
         self.connect_to_and_or_create_database(cnx, cursor)
         self.create_tables(cursor)
+        print("Created Tables Successfully")
         self.finish(cnx, cursor)
     
     def connect(self):
         try:
             print("Attempting Connection")
-            cnx = mysql.connector.connect(user='root',password= 'pass', database="BuffGrades")
+            cnx = mysql.connector.connect(user='root',password= '3308', database="BuffGrades")
             print("Creating Cursor")
             cursor = cnx.cursor()
             
             return cnx, cursor
         except mysql.connector.Error as err:
             print("Connection Failed: {} , Attempting to create database".format(err))
-            cnx = mysql.connector.connect(user='root', password='pass')
+            cnx = mysql.connector.connect(user='root', password='3308')
             return cnx, cnx.cursor()
     
     def connect_to_and_or_create_database(self, cnx, cursor):
@@ -62,6 +63,7 @@ class DatabaseSetup(object):
     def finish(self, cnx, cursor):
         cursor.close()
         cnx.close()
+        print("Database setup complete.")
 
 if __name__ == '__main__':
     DatabaseSetup()

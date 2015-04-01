@@ -17,12 +17,13 @@ TABLES = {
     ") ENGINE=InnoDB"),
 
 	'courses': (
-    "CREATE TABLE `personal_info` ("
-	"personalInfoId int(11) AUTO_INCREMENT NOT NULL,"
-	"userName varchar(16) NOT NULL,"
-	"firstName varchar(16) NOT NULL,"
-	"lastName varchar(16) NOT NULL,"
-	"  PRIMARY KEY (`personalInfoId`)"
+    "CREATE TABLE `courses` ("
+	"id int(11) AUTO_INCREMENT NOT NULL,"
+	"assignmentId int(8) NOT NULL,"
+	"courseId varchar(8) NOT NULL,"
+	"courseName varchar(30) NOT NULL,"
+	"assignmentTypeId varchar(12) NOT NULL,"
+	"  PRIMARY KEY (`id`)"
     ") ENGINE=InnoDB"),
 
 	'assignmentTypeId': (
@@ -37,7 +38,7 @@ TABLES = {
 	") ENGINE=InnoDB"),
 	
 	'assignment': (
-    "CREATE TABLE `personal_info` ("
+    "CREATE TABLE `assignment` ("
 	"id int(11) AUTO_INCREMENT NOT NULL,"
 	"assignmentID int(8) NOT NULL,"
 	"assigmentTypeID varchar(16) NOT NULL,"
