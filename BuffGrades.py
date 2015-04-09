@@ -63,15 +63,15 @@ class DatabaseSetup(object):
              
     def add_name(self, cnx, cursor):
         try:
-            user = raw_input("Please enter your desired username")
-            first = raw_input("Please enter your first name")
-            last = raw_input("please enter your last name")
+            user = raw_input("\n Please enter your desired username ")
+            first = raw_input("\n Please enter your first name ")
+            last = raw_input("\n please enter your last name ")
             
             addName_Data = (user, first, last)
             
             addName = ("INSERT INTO personal_info"
                     "(userName, firstName, lastName) "
-                    "VALUES (%ss, %s, %s)")
+                    "VALUES (%s, %s, %s)")
                     
             cursor.execute(addName, addName_Data)
             cnx.commit()
