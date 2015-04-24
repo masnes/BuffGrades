@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to BuffGrades’s documentation! &mdash; BuffGrades 0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="BuffGrades 0.0 documentation" href="#" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">BuffGrades 0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-buffgrades-s-documentation">
+<h1>Welcome to BuffGrades&#8217;s documentation!<a class="headerlink" href="#welcome-to-buffgrades-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<span class="target" id="module-BuffGrades"></span><div class="section" id="the-functions">
+<h2>The Functions<a class="headerlink" href="#the-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="BuffGrades.__init__">
+<code class="descclassname">BuffGrades.</code><code class="descname">__init__</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#BuffGrades.__init__" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">This function initializes the database, setting up all the basic tables with no info.</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="BuffGrades.connect">
+<code class="descclassname">BuffGrades.</code><code class="descname">connect</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#BuffGrades.connect" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">This function attempts to connect to the database.</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="BuffGrades.connect_to_and_or_create_database">
+<code class="descclassname">BuffGrades.</code><code class="descname">connect_to_and_or_create_database</code><span class="sig-paren">(</span><em>self</em>, <em>cnx</em>, <em>cursor</em><span class="sig-paren">)</span><a class="headerlink" href="#BuffGrades.connect_to_and_or_create_database" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">Creates cursor and cnx connection object, runs create_database to create database if one does not exist</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="BuffGrades.create_database">
+<code class="descclassname">BuffGrades.</code><code class="descname">create_database</code><span class="sig-paren">(</span><em>self</em>, <em>cursor</em><span class="sig-paren">)</span><a class="headerlink" href="#BuffGrades.create_database" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">Has the cursor actually create the MySQL database</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="BuffGrades.create_tables">
+<code class="descclassname">BuffGrades.</code><code class="descname">create_tables</code><span class="sig-paren">(</span><em>self</em>, <em>cursor</em><span class="sig-paren">)</span><a class="headerlink" href="#BuffGrades.create_tables" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">Creates all the tables with proper MySQL syntax and BuffGrades formatting</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="BuffGrades.add_name">
+<code class="descclassname">BuffGrades.</code><code class="descname">add_name</code><span class="sig-paren">(</span><em>self</em>, <em>cnx</em>, <em>cursor</em><span class="sig-paren">)</span><a class="headerlink" href="#BuffGrades.add_name" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">Has user enter desired Username, and First and Last names, adds info into personal_info table</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="BuffGrades.finish">
+<code class="descclassname">BuffGrades.</code><code class="descname">finish</code><span class="sig-paren">(</span><em>self</em>, <em>cnx</em>, <em>cursor</em><span class="sig-paren">)</span><a class="headerlink" href="#BuffGrades.finish" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">Deconstructor, closes cnx and cursor objects</code></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to BuffGrades&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#the-functions">The Functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/AutoDocFiles.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Jeremy Chrestionson, David Becker, Nishesh Shukla, Michael Asnes.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
+      
+      |
+      <a href="_sources/AutoDocFiles.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>
