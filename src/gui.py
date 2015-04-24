@@ -37,25 +37,57 @@ class Grades(QDialog):
         grade_labels = [QLabel(str(i)) for i in grades]
         return (assignment_type_label, grade_labels)
 
+class AddClass(QWidget):
+    def __init__(self, parent=None):
+        super(AddClass, self).__init__(parent)
+        
+        self.add_classname = QLabel('Add another Class')
+        self.name = QLineEdit()
+        self.name.setPlaceholderText('Class Name')
+
+
+
+        self.submit = QPushButton('Submit')
+        self.submit.clicked.connect(lambda: self.submit_classname())
+
+        layout= QVBoxLayout()
+        layout.addWidget(self.add_classname)
+        layout.addWidget(self.name)
+        layout.addWidget(self.submit)
+        self.setLayout(layout)
+
+
+    def submit_classname(self):
+        classname = self.name.text()
+        msgbox = QMessageBox()
+        msgbox.setText("{}, class created!".format(classname))
+        msgbox.exec_() 
+        
 class Window(QWidget):
     def __init__(self, parent=None):
-        super(Grades, self).__init__(parent)
+        super(Window, self).__init__(parent)
 
         grades_window = Grades()
+        add_classname = AddClass()
 
-        self.stackedLayout = QtGui.QStackedLayout()
+        self.stackedLayout = QStackedLayout()
         self.stackedLayout.addWidget(grades_window)
+        self.stackedLayout.addWidget(add_classname)
 
-        self.frame = QtGui.QFrame()
+        self.frame = QFrame()
         self.frame.setLayout(self.stackedLayout)
 
-        self.button1 = QtGui.QPushButton('Grades')
+        self.button1 = QPushButton('Grades')
         self.button1.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(0))
+        self.button2 = QPushButton('Add a Class')
+        self.button2.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(1))
 
-        buttonLayout = QtGui.QHBoxLayout()
+
+        buttonLayout = QHBoxLayout()
+        buttonLayout.addWidget(self.button2)
         buttonLayout.addWidget(self.button1)
 
-        layout = QtGui.QVBoxLayout(self)
+        layout = QVBoxLayout(self)
         layout.addLayout(buttonLayout)
         layout.addWidget(self.frame)
 
