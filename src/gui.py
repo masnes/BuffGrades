@@ -37,25 +37,70 @@ class Grades(QDialog):
         grade_labels = [QLabel(str(i)) for i in grades]
         return (assignment_type_label, grade_labels)
 
+class AddAssignment(QWidget):
+    def __init__(self, classname, assignment_type, parent=None):
+        super(AddAssignment, self).__init__(parent)
+
+        self.addAssignment = QLabel('Add an assignment')
+        self.name = QLineEdit()
+        self.name.setPlaceholderText('Assignment Name')
+        self.grade = QSpinBox()
+        self.grade.setMinimum(0)
+        self.grade.setMaximum(200)
+
+        self.submit = QPushButton('Submit')
+        self.submit.clicked.connect(lambda: self.submit_assignment(classname, assignment_type))
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.addAssignment)
+        layout.addWidget(self.name)
+        layout.addWidget(self.grade)
+        layout.addWidget(self.submit)
+        self.setLayout(layout)
+
+    def new(self):
+        self.name.setText('')
+        self.grade.setValue(100)
+
+    def submit_assignment(self, classname, assignment_type):
+        name = self.name.text()
+        grade = self.grade.value()
+        msgBox = QMessageBox()
+        msgBox.setText("Assignment submitted. Class: {}, type: {}, name: {}, "
+                       "grade: {}%".format(classname, assignment_type, name, grade))
+        msgBox.exec_()
+        self.new()
+        # TODO:
+        # db.add_assignment(classname, assignment_type, assignment_name, grade)
+
+
 class Window(QWidget):
     def __init__(self, parent=None):
-        super(Grades, self).__init__(parent)
+        super(Window, self).__init__(parent)
 
         grades_window = Grades()
+        add_assignment_window = AddAssignment('test class', 'test assignment type')
 
-        self.stackedLayout = QtGui.QStackedLayout()
+        self.stackedLayout = QStackedLayout()
         self.stackedLayout.addWidget(grades_window)
+        self.stackedLayout.addWidget(add_assignment_window)
+        # add other windows here
 
-        self.frame = QtGui.QFrame()
+        self.frame = QFrame()
         self.frame.setLayout(self.stackedLayout)
 
-        self.button1 = QtGui.QPushButton('Grades')
+        self.button1 = QPushButton('Grades')
         self.button1.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(0))
+        self.add_assignment_button = QPushButton('Add Assignment')
+        self.add_assignment_button.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(1))
+        # add buttons for other windows here
 
-        buttonLayout = QtGui.QHBoxLayout()
+        buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.button1)
+        buttonLayout.addWidget(self.add_assignment_button)
+        # and here
 
-        layout = QtGui.QVBoxLayout(self)
+        layout = QVBoxLayout(self)
         layout.addLayout(buttonLayout)
         layout.addWidget(self.frame)
 
