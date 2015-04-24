@@ -74,15 +74,43 @@ class AddAssignment(QWidget):
         # db.add_assignment(classname, assignment_type, assignment_name, grade)
 
 
+class AddClass(QWidget):
+    def __init__(self, parent=None):
+        super(AddClass, self).__init__(parent)
+
+        self.add_classname = QLabel('Add another Class')
+        self.name = QLineEdit()
+        self.name.setPlaceholderText('Class Name')
+
+
+
+        self.submit = QPushButton('Submit')
+        self.submit.clicked.connect(lambda: self.submit_classname())
+
+        layout= QVBoxLayout()
+        layout.addWidget(self.add_classname)
+        layout.addWidget(self.name)
+        layout.addWidget(self.submit)
+        self.setLayout(layout)
+
+
+    def submit_classname(self):
+        classname = self.name.text()
+        msgbox = QMessageBox()
+        msgbox.setText("{}, class created!".format(classname))
+        msgbox.exec_()
+
 class Window(QWidget):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
 
         grades_window = Grades()
         add_assignment_window = AddAssignment('test class', 'test assignment type')
+        add_classname = AddClass()
 
         self.stackedLayout = QStackedLayout()
         self.stackedLayout.addWidget(grades_window)
+        self.stackedLayout.addWidget(add_classname)
         self.stackedLayout.addWidget(add_assignment_window)
         # add other windows here
 
@@ -91,11 +119,14 @@ class Window(QWidget):
 
         self.button1 = QPushButton('Grades')
         self.button1.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(0))
+        self.button2 = QPushButton('Add a Class')
+        self.button2.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(1))
         self.add_assignment_button = QPushButton('Add Assignment')
-        self.add_assignment_button.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(1))
+        self.add_assignment_button.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(2))
         # add buttons for other windows here
 
         buttonLayout = QHBoxLayout()
+        buttonLayout.addWidget(self.button2)
         buttonLayout.addWidget(self.button1)
         buttonLayout.addWidget(self.add_assignment_button)
         # and here
