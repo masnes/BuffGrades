@@ -37,10 +37,32 @@ class Grades(QDialog):
         grade_labels = [QLabel(str(i)) for i in grades]
         return (assignment_type_label, grade_labels)
 
+class Window(QWidget):
+    def __init__(self, parent=None):
+        super(Grades, self).__init__(parent)
+
+        grades_window = Grades()
+
+        self.stackedLayout = QtGui.QStackedLayout()
+        self.stackedLayout.addWidget(grades_window)
+
+        self.frame = QtGui.QFrame()
+        self.frame.setLayout(self.stackedLayout)
+
+        self.button1 = QtGui.QPushButton('Grades')
+        self.button1.clicked.connect(lambda: self.stackedLayout.setCurrentIndex(0))
+
+        buttonLayout = QtGui.QHBoxLayout()
+        buttonLayout.addWidget(self.button1)
+
+        layout = QtGui.QVBoxLayout(self)
+        layout.addLayout(buttonLayout)
+        layout.addWidget(self.frame)
+
 def main():
     app = QApplication(sys.argv)
-    grades = Grades()
-    grades.show()
+    window = Window()
+    window.show()
     app.exec_()
 
 if __name__ == '__main__':
