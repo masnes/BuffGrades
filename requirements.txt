@@ -5,6 +5,7 @@
 pyside
 
 # Database requirements
+mysql-python
 mysql-connector-python
 
 # Important:
