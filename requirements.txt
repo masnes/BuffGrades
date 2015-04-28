@@ -1,4 +1,4 @@
-# Install the following with pip3
+# Install the following with **pip3**
 # You may use a virtualenvironment if you want
 
 # Gui requirements
