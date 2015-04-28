@@ -7,7 +7,9 @@ from static.TableData import TABLES, TABLEORDER
 DB_NAME = 'BuffGrades'
 
 class DatabaseSetup(object):
-    def __init__(self):
+    def __init__(self, user, password):
+        self.user = user
+        self.password = password
         cnx, cursor = self.connect()
         self.connect_to_and_or_create_database(cnx, cursor)
         self.create_tables(cursor)
@@ -18,14 +20,14 @@ class DatabaseSetup(object):
     def connect(self):
         try:
             print("Attempting Connection")
-            cnx = mysql.connector.connect(user='root',password= 'pass', database="BuffGrades")
+            cnx = mysql.connector.connect(user=self.user, password=self.password, database="BuffGrades")
             print("Creating Cursor")
             cursor = cnx.cursor()
 
             return cnx, cursor
         except mysql.connector.Error as err:
             print("Connection Failed: {} , Attempting to create database".format(err))
-            cnx = mysql.connector.connect(user='root', password='pass')
+            cnx = mysql.connector.connect(user=self.user, password=self.password)
             return cnx, cnx.cursor()
 
     def connect_to_and_or_create_database(self, cnx, cursor):
@@ -85,4 +87,4 @@ class DatabaseSetup(object):
        print("Database setup complete.")
 
 if __name__ == '__main__':
-    DatabaseSetup()
+    DatabaseSetup('root', 'pass')

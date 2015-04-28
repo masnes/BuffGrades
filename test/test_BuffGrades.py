@@ -27,6 +27,8 @@ class DatabaseSetupTestMockup(DatabaseSetup):
 
 class DatabaseSetupTests(unittest.TestCase):
     def setup(self):
+        self.user = 'root'
+        self.password = 'pass'
         self.cnx = None
         self.cursor = None
         self.databaseSetupTestMockup = DatabaseSetupTestMockup()
