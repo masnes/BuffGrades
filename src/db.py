@@ -23,10 +23,10 @@ class DatabaseSetup(object):
             cursor = cnx.cursor()
 
             return cnx, cursor
-       except mysql.connector.Error as err:
-           print("Connection Failed: {} , Attempting to create database".format(err))
-           cnx = mysql.connector.connect(user='root', password='pass')
-           return cnx, cnx.cursor()
+        except mysql.connector.Error as err:
+            print("Connection Failed: {} , Attempting to create database".format(err))
+            cnx = mysql.connector.connect(user='root', password='pass')
+            return cnx, cnx.cursor()
 
     def connect_to_and_or_create_database(self, cnx, cursor):
         try:
