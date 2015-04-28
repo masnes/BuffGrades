@@ -16,10 +16,22 @@ which contains all previous assignments we have completed as required by the cla
 Finding and Building Doc's:
 In order to find go to master branch, enter doc folder, enter BuffGradesDocbuild folder, and execute ./html
 
-Describe how to buld/run/test/etc code:
+Describe how to build/run/test/etc code:
+
+/\ Required Software /\
+  Current Versions of:
+    - PySide (for python 3) pip install PySide
+    - Connector Python: https://dev.mysql.com/downloads/connector/python/
+    - MySQL: http://www.mysql.com/downloads/
+    - Python: (python 3 required for GUI) https://www.python.org/downloads/
+
+run mysql -u root -p (then enter your password or create the password 'pass' preferably) to start SQL server
 run ./BuffGrades.py
+
+*note* There will be a problem running ./BuffGrades.py with the argument to run the database (d) as you need an SQL server running. The SQL 'root' and 'pass' information is currently hardcoded as such within the db.py file, so in order for the Connector Python scripts to run, the 'root' and 'pass' fields must be manually replaced with whatever the login information for you personal SQL server is. This can be found on Line: 21 of the db.py file inside the src folder in the master branch. After manipulating those fields with the proper information, the Connector Python should be able to access and appropriately create and manage a new database for BuffGrades.
 
 CI System:
 We are not using a CI System with our project and in fact find it far more gratifying to write and execute our tests
 each time by our own free will. Rather than allowing the machines to take control of our baby. CI System, or as some
 call it "Skynet."
+
