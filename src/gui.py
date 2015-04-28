@@ -3,7 +3,7 @@ from PySide.QtCore import *
 
 import sys
 
-import dummy_class_data as data
+import static.dummy_class_data as data
 
 class Grades(QDialog):
 
@@ -135,11 +135,8 @@ class Window(QWidget):
         layout.addLayout(buttonLayout)
         layout.addWidget(self.frame)
 
-def main():
+def run_gui():
     app = QApplication(sys.argv)
     window = Window()
     window.show()
     app.exec_()
-
-if __name__ == '__main__':
-    main()

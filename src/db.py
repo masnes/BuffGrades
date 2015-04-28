@@ -2,7 +2,7 @@
 from __future__ import print_function
 import mysql.connector
 from mysql.connector import errorcode
-from TableData import TABLES, TABLEORDER
+from static.TableData import TABLES, TABLEORDER
 
 DB_NAME = 'BuffGrades'
 
