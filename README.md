@@ -14,9 +14,10 @@ our src has all of our source code, and our test has our test code. The cherry o
 which contains all previous assignments we have completed as required by the class.
 
 Finding and Building Doc's:
-In order to find our doc's 
+In order to find go to master branch, enter doc folder, enter BuffGradesDocbuild folder, and execute ./html
 
-Describe how to buld/run/test/etc code: 
+Describe how to buld/run/test/etc code:
+run ./BuffGrades.py
 
 CI System:
 We are not using a CI System with our project and in fact find it far more gratifying to write and execute our tests
